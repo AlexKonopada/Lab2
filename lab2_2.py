@@ -1,9 +1,9 @@
 import json
 import twitter1
-import twitter2
+import twitter3
 
 # data = twitter1.data_from_twitter1()
-data = twitter2.data_from_twitter2()
+# data = twitter3.data_from_twitter3()
 
 def analyzing_data(data):
     '''
