@@ -4,9 +4,7 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 import folium
 
-data = twitter2.data_from_twitter2()
-with open('friends.json', 'w') as f:
-    json.dump(data, f, indent=2)
+TWITTER_URL = 'https://api.twitter.com/1.1/friends/list.json'
 
 def getting_friends_locations(data):
     '''
@@ -60,15 +58,14 @@ def creating_map(dataframe):
     for lt, ln, f in zip(lat, lon, friends):
         fg.add_child(folium.CircleMarker(location=[lt, ln], radius=10, popup=f))
     map.add_child(fg)
-    map.save('tavarischi.html')
+    map.save('/home/alex/Desktop/labs/Lab2/templates/tavarischi.html')
     return df
-info = getting_friends_locations(data)
-final_data = adding_coordinates(to_pandas(info))
-print(creating_map(final_data))
 
 
+def main(name):
+    data = twitter2.data_from_twitter2(name)
+    diction = getting_friends_locations(data)
+    df = to_pandas(diction)
+    new_df = adding_coordinates(df)
+    last_df = creating_map(new_df)
 
-
-
-
-# print(getting_friends_locations(data))
